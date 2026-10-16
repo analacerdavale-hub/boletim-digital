@@ -1,161 +1,165 @@
-/* ===== Reset básico ===== */
+//* Configurações globais e paleta de cores */
+:root {
+  --cor-principal: #6c5ce7;       /* Roxo vibrante */
+  --cor-secundaria: #00cec9;      /* Turquesa / Rosa Neon de destaque */
+  --cor-fundo: #f4f6f9;           /* Fundo leve e claro */
+  --cor-card: #ffffff;            /* Fundo dos cards */
+  --cor-card-bg-subtil: #f8f7ff;   /* Fundo suave para cards */
+  --cor-texto: #2d3436;           /* Texto escuro legível */
+  --cor-borda: #e2e8f0;           /* Borda fina discreta */
+  --cor-sucesso: #00b894;         /* Verde para bom desempenho */
+  --cor-alerta: #d63031;          /* Vermelho/Laranja para atenção */
+}
+
+/* Reset básico de margens e fontes */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== Variáveis de cor (roxo claro + lilás) ===== */
-:root {
-  --roxo-claro: #9b7ede;      /* cor principal */
-  --roxo-escuro: #6a4fb6;     /* para textos/hover */
-  --lilas-claro: #ede7fb;     /* cor secundária (fundos suaves) */
-  --branco: #ffffff;
-  --texto: #2e2e3a;
-  --cinza-linha: #e2dcf3;
-}
-
-/* ===== Corpo da página ===== */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: var(--lilas-claro);
-  color: var(--texto);
-  line-height: 1.5;
-  padding: 16px;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6;
 }
 
-/* ===== Cabeçalho ===== */
-.cabecalho {
-  background-color: var(--roxo-claro);
-  color: var(--branco);
-  padding: 24px 16px;
-  border-radius: 12px;
+/* Cabeçalho do Boletim */
+header {
+  background: linear-gradient(135deg, var(--cor-principal), #5f27cd);
+  color: white;
+  padding: 2rem 1rem;
   text-align: center;
-  margin-bottom: 20px;
+  border-bottom: 4px solid var(--cor-secundaria);
 }
 
-.cabecalho h1 {
-  font-size: 26px;
-  margin-bottom: 4px;
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
 }
 
-.subtitulo {
-  font-size: 15px;
+header p {
+  font-size: 1.1rem;
   opacity: 0.95;
 }
 
-/* ===== Área dos cards de resumo ===== */
-.cards {
+/* Container central */
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Cards de Resumo */
+.cards-grid {
   display: grid;
-  /* Em telas grandes: até 5 cards por linha. Em pequenas: 1 por linha. */
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-  margin-bottom: 24px;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Cada card individual */
 .card {
-  background-color: var(--roxo-claro);
-  color: var(--branco);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 10px rgba(106, 79, 182, 0.25);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100px;
+  background-color: var(--cor-card-bg-subtil);
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+  transition: transform 0.2s ease;
 }
 
-.card .titulo-card {
-  font-size: 13px;
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  color: #636e72;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  opacity: 0.9;
-  margin-bottom: 6px;
+  margin-bottom: 0.5rem;
 }
 
-.card .valor-card {
-  font-size: 22px;
+.card-valor {
+  font-size: 1.8rem;
   font-weight: bold;
+  color: var(--cor-principal);
 }
 
-/* ===== Área da tabela ===== */
-.area-tabela h2 {
-  font-size: 20px;
-  color: var(--roxo-escuro);
-  margin-bottom: 12px;
+.card-status {
+  font-size: 0.8rem;
+  color: var(--cor-sucesso);
+  font-weight: 600;
+  display: block;
+  margin-top: 0.3rem;
 }
 
-/* Envolve a tabela para permitir rolagem em telas pequenas */
-.tabela-responsiva {
-  overflow-x: auto;
-  background-color: var(--branco);
+/* Tabela de Notas */
+.tabela-container {
+  background-color: var(--cor-card);
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(106, 79, 182, 0.15);
+  border: 1px solid var(--cor-borda);
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
 }
 
-.tabela-boletim {
+.tabela-container h2 {
+  margin-bottom: 1rem;
+  color: var(--cor-principal);
+  font-size: 1.4rem;
+}
+
+/* Garante a rolagem da tabela em telas pequenas (celulares) */
+.tabela-wrapper {
+  overflow-x: auto;
+}
+
+table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 720px; /* garante que a tabela não fique espremida */
-}
-
-.tabela-boletim th,
-.tabela-boletim td {
-  padding: 10px 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--cinza-linha);
-  font-size: 14px;
-}
-
-/* Primeira coluna (Disciplina) alinhada à esquerda */
-.tabela-boletim th:first-child,
-.tabela-boletim td:first-child {
   text-align: left;
+}
+
+th, td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Estilos de situação da nota */
+.status-bom {
+  color: var(--cor-sucesso);
   font-weight: bold;
 }
 
-.tabela-boletim thead th {
-  background-color: var(--roxo-claro);
-  color: var(--branco);
-  position: sticky;
-  top: 0;
-}
-
-/* Linhas pares com fundo lilás bem suave, para facilitar a leitura */
-.tabela-boletim tbody tr:nth-child(even) {
-  background-color: #f7f3fe;
-}
-
-/* ===== Cores das situações ===== */
-.situacao-bom {
-  color: #2e7d32;      /* verde discreto */
+.status-atencao {
+  color: var(--cor-alerta);
   font-weight: bold;
 }
 
-.situacao-atencao {
-  color: #c62828;      /* vermelho discreto */
-  font-weight: bold;
-}
-
-.situacao-sem-nota {
-  color: #777;
+.status-indisponivel {
+  color: #94a3b8;
   font-style: italic;
 }
 
-/* ===== Responsividade para telas pequenas ===== */
-@media (max-width: 480px) {
-  .cabecalho h1 {
-    font-size: 22px;
+/* Ajustes para telas de celular */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.7rem;
   }
-
-  .card .valor-card {
-    font-size: 19px;
-  }
-
-  .tabela-boletim th,
-  .tabela-boletim td {
-    padding: 8px;
-    font-size: 13px;
+  
+  .container {
+    margin: 1rem auto;
   }
 }

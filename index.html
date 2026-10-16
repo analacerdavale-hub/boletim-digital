@@ -1,32 +1,54 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Deixa o site funcionar bem em celular -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Boletim Digital</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boletim Digital - 8º Ano</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Cabeçalho com título e subtítulo -->
-  <header class="cabecalho">
+  <!-- Cabeçalho principal do site -->
+  <header>
     <h1>Boletim Digital</h1>
-    <p class="subtitulo">8º Ano — Estudante Exemplo</p>
+    <p>Estudante: <strong>Estudante Exemplo</strong> | Série: <strong>8º Ano</strong></p>
   </header>
 
-  <main class="conteudo">
+  <main class="container">
+    <!-- Área de Cards com o resumo geral -->
+    <section class="cards-grid">
+      <div class="card">
+        <h3>Média Geral</h3>
+        <p id="media-geral" class="card-valor">—</p>
+      </div>
 
-    <!-- Área dos cards de resumo (preenchidos pelo JavaScript) -->
-    <section class="cards" id="cardsResumo">
-      <!-- Os cards serão criados aqui automaticamente -->
+      <div class="card">
+        <h3>Total de Faltas</h3>
+        <p id="total-faltas" class="card-valor">—</p>
+      </div>
+
+      <div class="card">
+        <h3>Bom Desempenho</h3>
+        <p id="bom-desempenho" class="card-valor">—</p>
+      </div>
+
+      <div class="card">
+        <h3>Precisa de Atenção</h3>
+        <p id="precisa-atencao" class="card-valor">—</p>
+      </div>
+
+      <div class="card">
+        <h3>Frequência</h3>
+        <p id="frequencia-geral" class="card-valor">92%</p>
+        <span class="card-status">Frequência adequada</span>
+      </div>
     </section>
 
-    <!-- Área da tabela (preenchida pelo JavaScript) -->
-    <section class="area-tabela">
-      <h2>Notas por disciplina</h2>
-      <div class="tabela-responsiva">
-        <table class="tabela-boletim">
+    <!-- Tabela responsiva de disciplinas -->
+    <section class="tabela-container">
+      <h2>Notas por Disciplina</h2>
+      <div class="tabela-wrapper">
+        <table>
           <thead>
             <tr>
               <th>Disciplina</th>
@@ -38,16 +60,15 @@
               <th>Situação</th>
             </tr>
           </thead>
-          <tbody id="corpoTabela">
-            <!-- As linhas das disciplinas serão criadas aqui pelo JavaScript -->
+          <!-- O JavaScript vai preencher estas linhas automaticamente -->
+          <tbody id="tabela-corpo">
           </tbody>
         </table>
       </div>
     </section>
-
   </main>
 
-  <!-- Arquivo JavaScript que vai dar vida à página -->
+  <!-- Ligação com o arquivo JavaScript que programaremos depois -->
   <script src="script.js"></script>
 </body>
 </html>
