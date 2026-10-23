@@ -1,74 +1,86 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boletim Digital - 8º Ano</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletim Digital</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="cabecalho">
+        <h1>Boletim Digital</h1>
+        <p class="subtitulo">Acompanhamento Escolar</p>
+    </header>
 
-  <!-- Cabeçalho principal do site -->
-  <header>
-    <h1>Boletim Digital</h1>
-    <p>Estudante: <strong>Estudante Exemplo</strong> | Série: <strong>8º Ano</strong></p>
-  </header>
+    <main class="conteudo-principal">
+        <!-- Tela de Acesso por PIN -->
+        <section id="secao-login" class="card card-login">
+            <h2>Acesso ao Boletim</h2>
+            <div class="info-aluno-login">
+                <p><strong>Turma:</strong> <span id="info-turma">8C</span></p>
+                <p><strong>Nº de Chamada:</strong> <span id="info-chamada">36</span></p>
+            </div>
+            <form id="form-login" onsubmit="return false;">
+                <div class="campo-grupo">
+                    <label for="campo-pin">Digite seu PIN:</label>
+                    <input type="password" id="campo-pin" placeholder="****" maxlength="10" required>
+                </div>
+                <button type="button" id="btn-entrar" onclick="fazerLogin()">Entrar</button>
+            </form>
+            <p id="mensagem-status-login" class="mensagem-status"></p>
+        </section>
 
-  <main class="container">
-    <!-- Área de Cards com o resumo geral -->
-    <section class="cards-grid">
-      <div class="card">
-        <h3>Média Geral</h3>
-        <p id="media-geral" class="card-valor">—</p>
-      </div>
+        <!-- Painel do Boletim (Escondido antes do Login) -->
+        <section id="secao-boletim" class="secao-boletim" style="display: none;">
+            <div class="acoes-painel">
+                <button id="btn-alterar-dados" onclick="abrirEdicao()">Alterar dados</button>
+            </div>
 
-      <div class="card">
-        <h3>Total de Faltas</h3>
-        <p id="total-faltas" class="card-valor">—</p>
-      </div>
+            <!-- Cards Resumo -->
+            <div id="cards-container" class="cards-grid">
+                <!-- Preenchido via JavaScript -->
+            </div>
 
-      <div class="card">
-        <h3>Bom Desempenho</h3>
-        <p id="bom-desempenho" class="card-valor">—</p>
-      </div>
+            <!-- Tabela Principal de Notas -->
+            <div class="tabela-container">
+                <table id="tabela-boletim">
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>1º Trim</th>
+                            <th>Faltas 1ºT</th>
+                            <th>2º Trim</th>
+                            <th>Faltas 2ºT</th>
+                            <th>3º Trim</th>
+                            <th>Faltas 3ºT</th>
+                            <th>Média Final</th>
+                            <th>Total Faltas</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela-boletim">
+                        <!-- Preenchido via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
 
-      <div class="card">
-        <h3>Precisa de Atenção</h3>
-        <p id="precisa-atencao" class="card-valor">—</p>
-      </div>
+            <!-- Modal / Formulário de Edição -->
+            <div id="painel-edicao" class="painel-edicao" style="display: none;">
+                <h3>Editar Notas e Faltas</h3>
+                <form id="form-edicao" onsubmit="return false;">
+                    <div id="campos-edicao-disciplinas">
+                        <!-- Preenchido dinamicamente pelo JS -->
+                    </div>
+                    <div class="botoes-edicao">
+                        <button type="button" id="btn-salvar" onclick="salvarAlteracoes()">Salvar alterações</button>
+                        <button type="button" id="btn-cancelar" onclick="fecharEdicao()">Cancelar</button>
+                    </div>
+                </form>
+                <p id="mensagem-status-edicao" class="mensagem-status"></p>
+            </div>
+        </section>
+    </main>
 
-      <div class="card">
-        <h3>Frequência</h3>
-        <p id="frequencia-geral" class="card-valor">92%</p>
-        <span class="card-status">Frequência adequada</span>
-      </div>
-    </section>
-
-    <!-- Tabela responsiva de disciplinas -->
-    <section class="tabela-container">
-      <h2>Notas por Disciplina</h2>
-      <div class="tabela-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Disciplina</th>
-              <th>1º Tri</th>
-              <th>2º Tri</th>
-              <th>3º Tri</th>
-              <th>Média</th>
-              <th>Faltas</th>
-              <th>Situação</th>
-            </tr>
-          </thead>
-          <!-- O JavaScript vai preencher estas linhas automaticamente -->
-          <tbody id="tabela-corpo">
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <!-- Ligação com o arquivo JavaScript que programaremos depois -->
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

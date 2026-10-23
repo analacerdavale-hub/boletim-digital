@@ -1,78 +1,159 @@
-// Dados brutos das 15 disciplinas do 8º Ano
-const dadosDisciplinas = [
-  { disciplina: "Língua Portuguesa", tri1: 82, tri2: "7,8", tri3: 85, faltas: [2, 1, 1] },
-  { disciplina: "Matemática", tri1: 52, tri2: "5,8", tri3: null, faltas: [3, 2, 1] },
-  { disciplina: "Ciências", tri1: "8,1", tri2: 76, tri3: 8.0, faltas: [1, 2, 0] },
-  { disciplina: "História", tri1: 7.0, tri2: 84, tri3: null, faltas: [1, 1, 1] },
-  { disciplina: "Geografia", tri1: 68, tri2: 7.3, tri3: "7,9", faltas: [0, 1, 1] },
-  { disciplina: "Língua Inglesa", tri1: 86, tri2: "8,1", tri3: 8.7, faltas: [1, 0, 0] },
-  { disciplina: "Arte", tri1: 9.0, tri2: 92, tri3: null, faltas: [1, 1, 0] },
-  { disciplina: "Educação Física", tri1: 95, tri2: 9.0, tri3: "9,4", faltas: [0, 1, 0] },
-  { disciplina: "Educação Digital", tri1: 88, tri2: 9.1, tri3: 93, faltas: [1, 0, 1] },
-  { disciplina: "Educação Financeira", tri1: 74, tri2: "7,8", tri3: null, faltas: [1, 1, 1] },
-  { disciplina: "Estudo Orientado", tri1: 8.0, tri2: 83, tri3: "8,5", faltas: [0, 1, 0] },
-  { disciplina: "Redação e Leitura", tri1: 62, tri2: "6,8", tri3: null, faltas: [2, 1, 1] },
-  { disciplina: "Pensamento Lógico", tri1: 48, tri2: 5.6, tri3: "6,0", faltas: [2, 2, 1] },
-  { disciplina: "Literatura Arte e Movimento", tri1: "7,7", tri2: 80, tri3: null, faltas: [1, 0, 1] },
-  { disciplina: "Práticas Experimentais", tri1: 58, tri2: "6,2", tri3: 6.4, faltas: [1, 1, 1] }
-];
+const CONFIG_ALUNO = {
+    turma: "8C",
+    numeroChamada: 36,
+    apiUrl: "https://boletim-api.profbt.com.br"
+};
 
-// Função para normalizar qualquer formato de nota para a escala de 0 a 10
-function normalizarNota(valor) {
-  // Se for vazio, nulo ou indefinido, retorna null (nota não lançada)
-  if (valor === null || valor === undefined || valor === "") {
-    return null;
-  }
+let sessaoPin = "";
 
-  // Se for texto, troca vírgula por ponto decimal
-  if (typeof valor === "string") {
-    valor = valor.replace(",", ".");
-  }
+let dadosBoletim = {
+    disciplinas: [
+        {
+            nome: "Matemática",
+            notas: [7.5, 8.0, 8.5],
+            faltas: [2, 0, 1]
+        },
+        {
+            nome: "Língua Portuguesa",
+            notas: [8.0, 7.5, 9.0],
+            faltas: [1, 2, 0]
+        },
+        {
+            nome: "História",
+            notas: [9.0, 8.5, 9.5],
+            faltas: [0, 1, 0]
+        },
+        {
+            nome: "Geografia",
+            notas: [8.5, 8.0, 8.0],
+            faltas: [0, 0, 1]
+        },
+        {
+            nome: "Ciências",
+            notas: [7.0, 8.5, 8.0],
+            faltas: [2, 1, 1]
+        }
+    ]
+};
 
-  let numero = Number(valor);
-
-  // Se não for um número válido, descarta
-  if (isNaN(numero)) {
-    return null;
-  }
-
-  // Se estiver entre 0 e 10, já está correto
-  if (numero >= 0 && numero <= 10) {
-    return numero;
-  }
-
-  // Se for maior que 10 e menor/igual a 100, divide por 10 (ex: 82 vira 8.2, 100 vira 10.0)
-  if (numero > 10 && numero <= 100) {
-    return numero / 10;
-  }
-
-  // Valores fora dessas regras são considerados inválidos
-  return null;
+function normalizarNota(val) {
+    if (val === null || val === undefined || val === "") return null;
+    if (typeof val === "string") {
+        val = val.replace(",", ".");
+    }
+    let num = parseFloat(val);
+    if (isNaN(num)) return null;
+    if (num > 10) {
+        num = num / 10;
+    }
+    return num;
 }
 
-// Função principal que processa os dados e constrói a página
-function construirBoletim() {
-  const corpoTabela = document.getElementById("tabela-corpo");
-  corpoTabela.innerHTML = ""; // Limpa a tabela antes de preencher
+function calcularMediaDisciplina(notas) {
+    let soma = 0;
+    let qtd = 0;
+    for (let i = 0; i < 3; i++) {
+        let n = normalizarNota(notas[i]);
+        if (n !== null) {
+            soma += n;
+            qtd++;
+        }
+    }
+    return qtd > 0 ? (soma / qtd) : null;
+}
 
-  let somaMediasValidas = 0;
-  let quantDisciplinasComMedia = 0;
-  let totalFaltasGeral = 0;
-  let qtdBomDesempenho = 0;
-  let qtdAtencao = 0;
+function calcularTotalFaltas(faltas) {
+    let total = 0;
+    for (let i = 0; i < 3; i++) {
+        let f = parseInt(faltas[i]);
+        if (!isNaN(f) && f >= 0) {
+            total += f;
+        }
+    }
+    return total;
+}
 
-  // Percorre cada uma das 15 disciplinas
-  dadosDisciplinas.forEach((item) => {
-    // Normaliza as notas dos 3 trimestres
-    const n1 = normalizarNota(item.tri1);
-    const n2 = normalizarNota(item.tri2);
-    const n3 = normalizarNota(item.tri3);
+function renderizarBoletim() {
+    const corpoTabela = document.getElementById("corpo-tabela-boletim");
+    const cardsContainer = document.getElementById("cards-container");
 
-    // Soma as faltas dos 3 trimestres
-    const totalFaltasDisciplina = item.faltas.reduce((acc, f) => acc + f, 0);
-    totalFaltasGeral += totalFaltasDisciplina;
+    if (corpoTabela) corpoTabela.innerHTML = "";
+    if (cardsContainer) cardsContainer.innerHTML = "";
 
-    // Calcula a média ignorando notas não lançadas (null)
-    const notasValidas = [n1, n2, n3].filter((n) => n !== null);
-    let mediaTexto = "—";
-    let situacaoTexto = "Nota ainda não disponível";
+    if (!dadosBoletim || !dadosBoletim.disciplinas) return;
+
+    dadosBoletim.disciplinas.forEach(d => {
+        let n1 = normalizarNota(d.notas ? d.notas[0] : null);
+        let n2 = normalizarNota(d.notas ? d.notas[1] : null);
+        let n3 = normalizarNota(d.notas ? d.notas[2] : null);
+
+        let f1 = (d.faltas && d.faltas[0] !== undefined && d.faltas[0] !== null) ? d.faltas[0] : 0;
+        let f2 = (d.faltas && d.faltas[1] !== undefined && d.faltas[1] !== null) ? d.faltas[1] : 0;
+        let f3 = (d.faltas && d.faltas[2] !== undefined && d.faltas[2] !== null) ? d.faltas[2] : 0;
+
+        let media = calcularMediaDisciplina([n1, n2, n3]);
+        let totalFaltas = calcularTotalFaltas([f1, f2, f3]);
+        let situacao = "Em Acompanhamento";
+        if (media !== null) {
+            situacao = media >= 6.0 ? "Aprovado" : "Atenção";
+        }
+
+        if (corpoTabela) {
+            const tr = document.createElement("tr");
+
+            const tdNome = document.createElement("td");
+            tdNome.textContent = d.nome;
+            tr.appendChild(tdNome);
+
+            const tdN1 = document.createElement("td");
+            tdN1.textContent = n1 !== null ? n1.toFixed(1) : "-";
+            tr.appendChild(tdN1);
+
+            const tdF1 = document.createElement("td");
+            tdF1.textContent = f1;
+            tr.appendChild(tdF1);
+
+            const tdN2 = document.createElement("td");
+            tdN2.textContent = n2 !== null ? n2.toFixed(1) : "-";
+            tr.appendChild(tdN2);
+
+            const tdF2 = document.createElement("td");
+            tdF2.textContent = f2;
+            tr.appendChild(tdF2);
+
+            const tdN3 = document.createElement("td");
+            tdN3.textContent = n3 !== null ? n3.toFixed(1) : "-";
+            tr.appendChild(tdN3);
+
+            const tdF3 = document.createElement("td");
+            tdF3.textContent = f3;
+            tr.appendChild(tdF3);
+
+            const tdMedia = document.createElement("td");
+            tdMedia.textContent = media !== null ? media.toFixed(1) : "-";
+            tr.appendChild(tdMedia);
+
+            const tdTotalFaltas = document.createElement("td");
+            tdTotalFaltas.textContent = totalFaltas;
+            tr.appendChild(tdTotalFaltas);
+
+            const tdSit = document.createElement("td");
+            tdSit.textContent = situacao;
+            tr.appendChild(tdSit);
+
+            corpoTabela.appendChild(tr);
+        }
+
+        if (cardsContainer) {
+            const divCard = document.createElement("div");
+            divCard.className = "card-item";
+
+            const h3 = document.createElement("h3");
+            h3.textContent = d.nome;
+            divCard.appendChild(h3);
+
+            const pMedia = document.createElement("p");
+            pMedia.textContent = "Média: " + (media !== null ? media.toFixed(1) : "-");
+            divCard.appendChild(pMedia);
+
+            const pFaltas = document.createElement("p");
