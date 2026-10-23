@@ -117,4 +117,113 @@ button:hover {
 
 .card-item h3 {
     font-size: 1.1rem;
-    color: #2c3e
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+/* Tabela */
+.tabela-container {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Edição */
+.acoes-painel {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.acoes-painel button {
+    width: auto;
+}
+
+.painel-edicao {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.painel-edicao h3 {
+    margin-bottom: 15px;
+}
+
+.grid-edicao-disciplina {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.grid-edicao-disciplina h4 {
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.campos-inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.campos-inputs div {
+    display: flex;
+    flex-direction: column;
+}
+
+.campos-inputs label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.campos-inputs input {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.botoes-edicao {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.botoes-edicao button {
+    flex: 1;
+}
+
+#btn-cancelar {
+    background-color: #e74c3c;
+}
+
+#btn-cancelar:hover {
+    background-color: #c0392b;
+}
+
+.input-invalido {
+    border-color: #e74c3c !important;
+    background-color: #fceae9;
+}
