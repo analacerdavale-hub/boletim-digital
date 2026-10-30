@@ -227,3 +227,83 @@ tr:hover {
     border-color: #e74c3c !important;
     background-color: #fceae9;
 }
+
+/* ==========================================================================
+   ESTILOS EXCLUSIVOS DA ÁREA DE GRÁFICOS
+   ========================================================================== */
+
+.area-graficos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.grafico-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grafico-card h2 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.cabecalho-card-faltas {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.cabecalho-card-faltas h2 {
+    margin-bottom: 0;
+}
+
+.grafico-container {
+    position: relative;
+    width: 100%;
+    height: 280px;
+}
+
+.badge-perigo {
+    background-color: #e74c3c;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.grafico-card-perigo {
+    border: 2px solid #e74c3c;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.25);
+}
+
+/* Responsividade do Grid de Gráficos */
+@media (max-width: 992px) {
+    .area-graficos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .area-graficos {
+        grid-template-columns: 1fr;
+    }
+
+    .grafico-container {
+        height: 250px;
+    }
+}
