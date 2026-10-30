@@ -32,6 +32,56 @@ let dadosBoletim = {
             nome: "Ciências",
             notas: [7.0, 8.5, 8.0],
             faltas: [2, 1, 1]
+        },
+        {
+            nome: "Língua Inglesa",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Arte",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Educação Física",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Educação Digital",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Educação Financeira",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Estudo Orientado",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Redação e Leitura",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Pensamento Lógico",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Literatura Arte e Movimento",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
+        },
+        {
+            nome: "Práticas Experimentais",
+            notas: [0, 0, 0],
+            faltas: [0, 0, 0]
         }
     ]
 };
