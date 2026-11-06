@@ -10,78 +10,78 @@ let dadosBoletim = {
     disciplinas: [
         {
             nome: "Matemática",
-            notas: [7.5, 8.0, 8.5],
-            faltas: [2, 0, 1]
+            notas: [5.2, 5.8, null],
+            faltas: [3, 2, 1]
         },
         {
             nome: "Língua Portuguesa",
-            notas: [8.0, 7.5, 9.0],
-            faltas: [1, 2, 0]
-        },
-        {
-            nome: "História",
-            notas: [9.0, 8.5, 9.5],
-            faltas: [0, 1, 0]
-        },
-        {
-            nome: "Geografia",
-            notas: [8.5, 8.0, 8.0],
-            faltas: [0, 0, 1]
-        },
-        {
-            nome: "Ciências",
-            notas: [7.0, 8.5, 8.0],
+            notas: [8.2, 7.8, 8.5],
             faltas: [2, 1, 1]
         },
         {
+            nome: "História",
+            notas: [7.0, 8.4, null],
+            faltas: [1, 1, 1]
+        },
+        {
+            nome: "Geografia",
+            notas: [6.8, 7.3, 7.9],
+            faltas: [0, 1, 1]
+        },
+        {
+            nome: "Ciências",
+            notas: [8.1, 7.6, 8.0],
+            faltas: [1, 2, 0]
+        },
+        {
             nome: "Língua Inglesa",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [8.6, 8.1, 8.7],
+            faltas: [1, 0, 0]
         },
         {
             nome: "Arte",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [9.0, 9.2, null],
+            faltas: [1, 1, 0]
         },
         {
             nome: "Educação Física",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [9.5, 9.0, 9.4],
+            faltas: [0, 1, 0]
         },
         {
             nome: "Educação Digital",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [8.8, 9.1, 9.3],
+            faltas: [1, 0, 1]
         },
         {
             nome: "Educação Financeira",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [7.4, 7.8, null],
+            faltas: [1, 1, 1]
         },
         {
             nome: "Estudo Orientado",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [8.0, 8.3, 8.5],
+            faltas: [0, 1, 0]
         },
         {
             nome: "Redação e Leitura",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [6.2, 6.8, null],
+            faltas: [2, 1, 1]
         },
         {
             nome: "Pensamento Lógico",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [4.8, 5.6, 6.0],
+            faltas: [2, 2, 1]
         },
         {
             nome: "Literatura Arte e Movimento",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [7.7, 8.0, null],
+            faltas: [1, 0, 1]
         },
         {
             nome: "Práticas Experimentais",
-            notas: [0, 0, 0],
-            faltas: [0, 0, 0]
+            notas: [5.8, 6.2, 6.4],
+            faltas: [1, 1, 1]
         }
     ]
 };
@@ -617,7 +617,7 @@ function atualizarGraficoFaltas() {
 
     dadosBoletim.disciplinas.forEach(d => {
         let f1 = (d.faltas && d.faltas[0] !== undefined && d.faltas[0] !== null) ? parseInt(d.faltas[0]) : 0;
-        let f2 = (d.faltas && d.faltas[1] !== undefined && d.faltas[1] !== null) ? parseInt(d.faltas[1]) : 0;
+        let f2 = (d.faltas && d.faltas[1] !== undefined && d.faltas[1] !== null) ? parseInt(d.faltas[2]) : 0;
         let f3 = (d.faltas && d.faltas[2] !== undefined && d.faltas[2] !== null) ? parseInt(d.faltas[2]) : 0;
 
         if (!isNaN(f1) && f1 >= 0) faltasTri1 += f1;
