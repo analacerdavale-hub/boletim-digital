@@ -9,78 +9,78 @@ let sessaoPin = "";
 let dadosBoletim = {
     disciplinas: [
         {
-            nome: "Matemática",
-            notas: ["5,2", "5,8", null],
-            faltas: [3, 2, 1]
-        },
-        {
             nome: "Língua Portuguesa",
-            notas: ["8,2", "7,8", "8,5"],
+            notas: [8.2, 7.8, 8.5],
             faltas: [2, 1, 1]
         },
         {
+            nome: "Matemática",
+            notas: [5.2, 5.8, null],
+            faltas: [3, 2, 1]
+        },
+        {
+            nome: "Ciências",
+            notas: [8.1, 7.6, 8.0],
+            faltas: [1, 2, 0]
+        },
+        {
             nome: "História",
-            notas: ["7,0", "8,4", null],
+            notas: [7.0, 8.4, null],
             faltas: [1, 1, 1]
         },
         {
             nome: "Geografia",
-            notas: ["6,8", "7,3", "7,9"],
+            notas: [6.8, 7.3, 7.9],
             faltas: [0, 1, 1]
         },
         {
-            nome: "Ciências",
-            notas: ["8,1", "7,6", "8,0"],
-            faltas: [1, 2, 0]
-        },
-        {
             nome: "Língua Inglesa",
-            notas: ["8,6", "8,1", "8,7"],
+            notas: [8.6, 8.1, 8.7],
             faltas: [1, 0, 0]
         },
         {
             nome: "Arte",
-            notas: ["9,0", "9,2", null],
+            notas: [9.0, 9.2, null],
             faltas: [1, 1, 0]
         },
         {
             nome: "Educação Física",
-            notas: ["9,5", "9,0", "9,4"],
+            notas: [9.5, 9.0, 9.4],
             faltas: [0, 1, 0]
         },
         {
             nome: "Educação Digital",
-            notas: ["8,8", "9,1", "9,3"],
+            notas: [8.8, 9.1, 9.3],
             faltas: [1, 0, 1]
         },
         {
             nome: "Educação Financeira",
-            notas: ["7,4", "7,8", null],
+            notas: [7.4, 7.8, null],
             faltas: [1, 1, 1]
         },
         {
             nome: "Estudo Orientado",
-            notas: ["8,0", "8,3", "8,5"],
+            notas: [8.0, 8.3, 8.5],
             faltas: [0, 1, 0]
         },
         {
             nome: "Redação e Leitura",
-            notas: ["6,2", "6,8", null],
+            notas: [6.2, 6.8, null],
             faltas: [2, 1, 1]
         },
         {
             nome: "Pensamento Lógico",
-            notas: ["4,8", "5,6", "6,0"],
+            notas: [4.8, 5.6, 6.0],
             faltas: [2, 2, 1]
         },
         {
             nome: "Literatura Arte e Movimento",
-            notas: ["7,7", "8,0", null],
+            notas: [7.7, 8.0, null],
             faltas: [1, 0, 1]
         },
         {
             nome: "Práticas Experimentais",
-            notas: ["5,8", "6,2", "6,4"],
+            notas: [5.8, 6.2, 6.4],
             faltas: [1, 1, 1]
         }
     ]
@@ -351,24 +351,24 @@ function fecharEdicao() {
 }
 
 function validarNotaInput(valStr) {
-    if (valStr === null || valStr === undefined) return { valido: true, valor: null, formatoApi: null };
+    if (valStr === null || valStr === undefined) return { valido: true, valor: null };
     let str = valStr.toString().trim();
-    if (str === "") return { valido: true, valor: null, formatoApi: null };
+    if (str === "") return { valido: true, valor: null };
 
-    let strNormalizada = str.replace(",", ".");
-    let num = Number(strNormalizada);
+    str = str.replace(",", ".");
+    let num = Number(str);
 
     if (isNaN(num)) return { valido: false };
+    if (num > 10) num = num / 10;
     if (num < 0 || num > 10) return { valido: false };
 
-    let formatoApi = str.includes(".") ? str.replace(".", ",") : str;
-    return { valido: true, valor: num, formatoApi: formatoApi };
+    return { valido: true, valor: num };
 }
 
 function validarFaltaInput(valStr) {
-    if (valStr === null || valStr === undefined) return { valido: false };
+    if (valStr === null || valStr === undefined) return { valido: true, valor: 0 };
     let str = valStr.toString().trim();
-    if (str === "") return { valido: false };
+    if (str === "") return { valido: true, valor: 0 };
 
     let num = Number(str);
     if (isNaN(num) || !Number.isInteger(num) || num < 0) {
@@ -401,7 +401,7 @@ async function salvarAlteracoes() {
                 possuiErro = true;
                 if (inpN) inpN.classList.add("input-invalido");
             } else {
-                novasNotas.push(resNota.formatoApi);
+                novasNotas.push(resNota.valor);
             }
 
             let resFalta = validarFaltaInput(inpF ? inpF.value : "");
