@@ -10,77 +10,77 @@ let dadosBoletim = {
     disciplinas: [
         {
             nome: "Matemática",
-            notas: [5.2, 5.8, null],
+            notas: ["5,2", "5,8", null],
             faltas: [3, 2, 1]
         },
         {
             nome: "Língua Portuguesa",
-            notas: [8.2, 7.8, 8.5],
+            notas: ["8,2", "7,8", "8,5"],
             faltas: [2, 1, 1]
         },
         {
             nome: "História",
-            notas: [7.0, 8.4, null],
+            notas: ["7,0", "8,4", null],
             faltas: [1, 1, 1]
         },
         {
             nome: "Geografia",
-            notas: [6.8, 7.3, 7.9],
+            notas: ["6,8", "7,3", "7,9"],
             faltas: [0, 1, 1]
         },
         {
             nome: "Ciências",
-            notas: [8.1, 7.6, 8.0],
+            notas: ["8,1", "7,6", "8,0"],
             faltas: [1, 2, 0]
         },
         {
             nome: "Língua Inglesa",
-            notas: [8.6, 8.1, 8.7],
+            notas: ["8,6", "8,1", "8,7"],
             faltas: [1, 0, 0]
         },
         {
             nome: "Arte",
-            notas: [9.0, 9.2, null],
+            notas: ["9,0", "9,2", null],
             faltas: [1, 1, 0]
         },
         {
             nome: "Educação Física",
-            notas: [9.5, 9.0, 9.4],
+            notas: ["9,5", "9,0", "9,4"],
             faltas: [0, 1, 0]
         },
         {
             nome: "Educação Digital",
-            notas: [8.8, 9.1, 9.3],
+            notas: ["8,8", "9,1", "9,3"],
             faltas: [1, 0, 1]
         },
         {
             nome: "Educação Financeira",
-            notas: [7.4, 7.8, null],
+            notas: ["7,4", "7,8", null],
             faltas: [1, 1, 1]
         },
         {
             nome: "Estudo Orientado",
-            notas: [8.0, 8.3, 8.5],
+            notas: ["8,0", "8,3", "8,5"],
             faltas: [0, 1, 0]
         },
         {
             nome: "Redação e Leitura",
-            notas: [6.2, 6.8, null],
+            notas: ["6,2", "6,8", null],
             faltas: [2, 1, 1]
         },
         {
             nome: "Pensamento Lógico",
-            notas: [4.8, 5.6, 6.0],
+            notas: ["4,8", "5,6", "6,0"],
             faltas: [2, 2, 1]
         },
         {
             nome: "Literatura Arte e Movimento",
-            notas: [7.7, 8.0, null],
+            notas: ["7,7", "8,0", null],
             faltas: [1, 0, 1]
         },
         {
             nome: "Práticas Experimentais",
-            notas: [5.8, 6.2, 6.4],
+            notas: ["5,8", "6,2", "6,4"],
             faltas: [1, 1, 1]
         }
     ]
@@ -163,7 +163,7 @@ function renderizarBoletim() {
             tr.appendChild(tdNome);
 
             const tdN1 = document.createElement("td");
-            tdN1.textContent = n1 !== null ? n1.toFixed(1) : "-";
+            tdN1.textContent = n1 !== null ? n1.toFixed(1).replace(".", ",") : "-";
             tr.appendChild(tdN1);
 
             const tdF1 = document.createElement("td");
@@ -171,7 +171,7 @@ function renderizarBoletim() {
             tr.appendChild(tdF1);
 
             const tdN2 = document.createElement("td");
-            tdN2.textContent = n2 !== null ? n2.toFixed(1) : "-";
+            tdN2.textContent = n2 !== null ? n2.toFixed(1).replace(".", ",") : "-";
             tr.appendChild(tdN2);
 
             const tdF2 = document.createElement("td");
@@ -179,7 +179,7 @@ function renderizarBoletim() {
             tr.appendChild(tdF2);
 
             const tdN3 = document.createElement("td");
-            tdN3.textContent = n3 !== null ? n3.toFixed(1) : "-";
+            tdN3.textContent = n3 !== null ? n3.toFixed(1).replace(".", ",") : "-";
             tr.appendChild(tdN3);
 
             const tdF3 = document.createElement("td");
@@ -187,7 +187,7 @@ function renderizarBoletim() {
             tr.appendChild(tdF3);
 
             const tdMedia = document.createElement("td");
-            tdMedia.textContent = media !== null ? media.toFixed(1) : "-";
+            tdMedia.textContent = media !== null ? media.toFixed(1).replace(".", ",") : "-";
             tr.appendChild(tdMedia);
 
             const tdTotalFaltas = document.createElement("td");
@@ -210,7 +210,7 @@ function renderizarBoletim() {
             divCard.appendChild(h3);
 
             const pMedia = document.createElement("p");
-            pMedia.textContent = "Média: " + (media !== null ? media.toFixed(1) : "-");
+            pMedia.textContent = "Média: " + (media !== null ? media.toFixed(1).replace(".", ",") : "-");
             divCard.appendChild(pMedia);
 
             const pFaltas = document.createElement("p");
@@ -307,6 +307,9 @@ function abrirEdicao() {
 
         for (let t = 1; t <= 3; t++) {
             let valNota = (d.notas && d.notas[t - 1] !== undefined && d.notas[t - 1] !== null) ? d.notas[t - 1] : "";
+            if (typeof valNota === "number") {
+                valNota = valNota.toString().replace(".", ",");
+            }
             let valFalta = (d.faltas && d.faltas[t - 1] !== undefined && d.faltas[t - 1] !== null) ? d.faltas[t - 1] : "";
 
             const divN = document.createElement("div");
@@ -348,17 +351,18 @@ function fecharEdicao() {
 }
 
 function validarNotaInput(valStr) {
-    if (valStr === null || valStr === undefined) return { valido: true, valor: null };
+    if (valStr === null || valStr === undefined) return { valido: true, valor: null, formatoApi: null };
     let str = valStr.toString().trim();
-    if (str === "") return { valido: true, valor: null };
+    if (str === "") return { valido: true, valor: null, formatoApi: null };
 
-    str = str.replace(",", ".");
-    let num = Number(str);
+    let strNormalizada = str.replace(",", ".");
+    let num = Number(strNormalizada);
 
     if (isNaN(num)) return { valido: false };
     if (num < 0 || num > 10) return { valido: false };
 
-    return { valido: true, valor: num };
+    let formatoApi = str.includes(".") ? str.replace(".", ",") : str;
+    return { valido: true, valor: num, formatoApi: formatoApi };
 }
 
 function validarFaltaInput(valStr) {
@@ -397,7 +401,7 @@ async function salvarAlteracoes() {
                 possuiErro = true;
                 if (inpN) inpN.classList.add("input-invalido");
             } else {
-                novasNotas.push(resNota.valor);
+                novasNotas.push(resNota.formatoApi);
             }
 
             let resFalta = validarFaltaInput(inpF ? inpF.value : "");
@@ -617,7 +621,7 @@ function atualizarGraficoFaltas() {
 
     dadosBoletim.disciplinas.forEach(d => {
         let f1 = (d.faltas && d.faltas[0] !== undefined && d.faltas[0] !== null) ? parseInt(d.faltas[0]) : 0;
-        let f2 = (d.faltas && d.faltas[1] !== undefined && d.faltas[1] !== null) ? parseInt(d.faltas[2]) : 0;
+        let f2 = (d.faltas && d.faltas[1] !== undefined && d.faltas[1] !== null) ? parseInt(d.faltas[1]) : 0;
         let f3 = (d.faltas && d.faltas[2] !== undefined && d.faltas[2] !== null) ? parseInt(d.faltas[2]) : 0;
 
         if (!isNaN(f1) && f1 >= 0) faltasTri1 += f1;
