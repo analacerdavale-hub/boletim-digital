@@ -10,78 +10,78 @@ let dadosBoletim = {
     disciplinas: [
         {
             nome: "Língua Portuguesa",
-            notas: [8.2, 7.8, 8.5],
-            faltas: [2, 1, 1]
+            notas: [7.0, 7.5, 0],
+            faltas: [5, 2, 0]
         },
         {
             nome: "Matemática",
-            notas: [5.2, 5.8, null],
-            faltas: [3, 2, 1]
+            notas: [6.5, 6.0, 0],
+            faltas: [8, 6, 0]
         },
         {
             nome: "Ciências",
-            notas: [8.1, 7.6, 8.0],
-            faltas: [1, 2, 0]
+            notas: [7.9, 8.2, 0],
+            faltas: [2, 5, 0]
         },
         {
             nome: "História",
-            notas: [7.0, 8.4, null],
-            faltas: [1, 1, 1]
+            notas: [9.4, 10.0, 0],
+            faltas: [2, 8, 0]
         },
         {
             nome: "Geografia",
-            notas: [6.8, 7.3, 7.9],
-            faltas: [0, 1, 1]
+            notas: [9.0, 6.0, 0],
+            faltas: [6, 1, 0]
         },
         {
             nome: "Língua Inglesa",
-            notas: [8.6, 8.1, 8.7],
-            faltas: [1, 0, 0]
+            notas: [7.8, 6.5, 0],
+            faltas: [7, 3, 0]
         },
         {
             nome: "Arte",
-            notas: [9.0, 9.2, null],
-            faltas: [1, 1, 0]
+            notas: [6.5, 7.0, 0],
+            faltas: [1, 2, 0]
         },
         {
             nome: "Educação Física",
-            notas: [9.5, 9.0, 9.4],
-            faltas: [0, 1, 0]
+            notas: [9.7, 7.3, 0],
+            faltas: [3, 0, 0]
         },
         {
             nome: "Educação Digital",
-            notas: [8.8, 9.1, 9.3],
-            faltas: [1, 0, 1]
+            notas: [7.6, 8.0, 0],
+            faltas: [2, 3, 0]
         },
         {
             nome: "Educação Financeira",
-            notas: [7.4, 7.8, null],
-            faltas: [1, 1, 1]
+            notas: [7.8, 7.8, 0],
+            faltas: [8, 1, 0]
         },
         {
             nome: "Estudo Orientado",
-            notas: [8.0, 8.3, 8.5],
-            faltas: [0, 1, 0]
+            notas: [7.6, 8.1, 0],
+            faltas: [6, 4, 0]
         },
         {
             nome: "Redação e Leitura",
-            notas: [6.2, 6.8, null],
-            faltas: [2, 1, 1]
+            notas: [7.1, 9.0, 0],
+            faltas: [2, 2, 0]
         },
         {
             nome: "Pensamento Lógico",
-            notas: [4.8, 5.6, 6.0],
-            faltas: [2, 2, 1]
+            notas: [8.2, 9.1, 0],
+            faltas: [3, 0, 0]
         },
         {
             nome: "Literatura Arte e Movimento",
-            notas: [7.7, 8.0, null],
-            faltas: [1, 0, 1]
+            notas: [7.7, 6.2, 0],
+            faltas: [0, 0, 0]
         },
         {
             nome: "Práticas Experimentais",
-            notas: [5.8, 6.2, 6.4],
-            faltas: [1, 1, 1]
+            notas: [8.8, 7.8, 0],
+            faltas: [4, 1, 0]
         }
     ]
 };
